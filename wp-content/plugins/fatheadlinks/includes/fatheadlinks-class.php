@@ -1,14 +1,14 @@
 <?php
-class Social_Links_Widget extends WP_Widget {
+class Fathead_Links_Widget extends WP_Widget {
 
 	/**
 	 * Sets up the widgets name etc
 	 */
 	public function __construct() {
 		parent::__construct(
-			'social_links_widget', // Base ID
-			esc_html__( 'Social Links Widget', 'sl_domain' ), // Name
-			array( 'description' => esc_html__( 'Adds social media icon links to widgets', 'sl_domain' ), ) // Args
+			'fathead_links_widget', // Base ID
+			esc_html__( 'Fathead Links Widget', 'sl_domain' ), // Name
+			array( 'description' => esc_html__( 'Adds fathead media icon links to widgets', 'sl_domain' ), ) // Args
 		);
 	}
 
@@ -38,7 +38,7 @@ class Social_Links_Widget extends WP_Widget {
         echo $args['before_widget'];
 
         //Call frontend function
-        $this->getSocialLinks($links, $icons, $icon_width);
+        $this->getFatheadLinks($links, $icons, $icon_width);
 
         echo $args['after_widget'];
        
@@ -85,7 +85,7 @@ class Social_Links_Widget extends WP_Widget {
 	 * @param array $instance The widget options
 	 */
 	public function getForm( $instance ) {
-       //Get social links
+       //Get fathead links
        if(isset($instance['facebook_link'])){
         $facebook_link = esc_attr($instance['facebook_link']);
        } else {
@@ -170,16 +170,18 @@ class Social_Links_Widget extends WP_Widget {
     }
     
     	/**
-	 * Gets and Displays Social Icons
+	 * Gets and Displays Fathead Icons
 	 *
-	 * @param array $links Social Links
-     * @param array $icons Social Icons
+	 * @param array $links Fathead Links
+     * @param array $icons Fathead Icons
      * @param array $icon_width Width of Icons
 	 */
-	public function getSocialLinks( $links, $icons, $icon_width ) {
+	public function getFatheadLinks( $links, $icons, $icon_width ) {
         ?>
             <div class="fatheadlinks">
-                <a target="_blank" href="<?php echo esc_attr($links['facebook']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['facebook']); ?>"</a>
+            <a target="_blank" href="<?php echo esc_attr($links['facebook']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['facebook']); ?>"></a>
+				<a target="_blank" href="<?php echo esc_attr($links['twitter']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['twitter']); ?>"></a>
+				<a target="_blank" href="<?php echo esc_attr($links['linkedin']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['linkedin']); ?>"></a>
             </div>
         <?php
     }
