@@ -19,9 +19,29 @@ class Social_Links_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-        ?>
-        TEST FRONTEND FORM
-        <?php
+        $links = array(
+            'facebook' => esc_attr($instance['facebook_link']),
+            'twitter' => esc_attr($instance['twitter_link']),
+            'linkedin' => esc_attr($instance['linkedin_link']),
+        );
+
+        $icons = array(
+            'facebook' => esc_attr($instance['facebook_icon']),
+            'twitter' => esc_attr($instance['twitter_icon']),
+            'linkedin' => esc_attr($instance['linkedin_icon']),
+
+            'icon_width' => esc_attr($instance['linkedin_icon']),
+        );
+
+        $icon_width=$instance['icon_width'];
+
+        echo $args['before_widget'];
+
+        //Call frontend function
+        $this->getSocialLinks($links, $icons, $icon_width);
+
+        echo $args['after_widget'];
+       
 	}
 
 	/**
@@ -30,7 +50,7 @@ class Social_Links_Widget extends WP_Widget {
 	 * @param array $instance The widget options
 	 */
 	public function form( $instance ) {
-        //Call Form Function
+        //Call backend Function
         $this->getForm($instance);
 	}
 
@@ -43,18 +63,21 @@ class Social_Links_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
+        // Get the links from user
 		$instance = array(
-            'facebook_link' => (!empty($new_instance['facebook_link'])) ? strip_tage($new_instance['facebook_link']) : '',
-            'twitter_link' => (!empty($new_instance['twitter_link'])) ? strip_tage($new_instance['twitter_link']) : '',
-            'linkedin_link' => (!empty($new_instance['linkedin_link'])) ? strip_tage($new_instance['linkedin_link']) : '', 
+            'facebook_link' => (!empty($new_instance['facebook_link'])) ? strip_tags($new_instance['facebook_link']) : '',
+            'twitter_link' => (!empty($new_instance['twitter_link'])) ? strip_tags($new_instance['twitter_link']) : '',
+            'linkedin_link' => (!empty($new_instance['linkedin_link'])) ? strip_tags($new_instance['linkedin_link']) : '',
 
-            'facebook_icon' => (!empty($new_instance['facebook_icon'])) ? strip_tage($new_instance['facebook_icon']) : '',
-            'twitter_icon' => (!empty($new_instance['twitter_icon'])) ? strip_tage($new_instance['twitter_icon']) : '',
-            'linkedin_icon' => (!empty($new_instance['linkedin_icon'])) ? strip_tage($new_instance['linkedin_icon']) : '', 
-
-            'icon_width' => (!empty($new_instance['icon_link'])) ? strip_tage($new_instance['icon_link']) : ''
+            'facebook_icon' => (!empty($new_instance['facebook_icon'])) ? strip_tags($new_instance['facebook_icon']) : '',
+            'twitter_icon' => (!empty($new_instance['twitter_icon'])) ? strip_tags($new_instance['twitter_icon']) : '',
+            'linkedin_icon' => (!empty($new_instance['linkedin_icon'])) ? strip_tags($new_instance['linkedin_icon']) : '',
+        
+            'icon_width' => (!empty($new_instance['icon_width'])) ? strip_tags($new_instance['icon_width']) : ''
         );
+        return $instance;
     }
+
     
     	/**
 	 * Gets and Displays Form
@@ -86,19 +109,19 @@ class Social_Links_Widget extends WP_Widget {
        if(isset($instance['facebook_icon'])){
         $facebook_icon = esc_attr($instance['facebook_icon']);
        } else {
-           $facebook_icon = plugins_url() . '/social-links/img/facebook.png';
+           $facebook_icon = plugins_url() . '/fatheadlinks/img/facebook.png';
        }  
        
        if(isset($instance['twitter_icon'])){
         $twitter_icon = esc_attr($instance['twitter_icon']);
        } else {
-           $twitter_icon= plugins_url() . '/social-links/img/twitter.png';
+           $twitter_icon= plugins_url() . '/fatheadlinks/img/twitter.png';
        } 
 
        if(isset($instance['linkedin_icon'])){
         $linkedin_icon = esc_attr($instance['linkedin_icon']);
        } else {
-           $linkedin_icon = plugins_url() . '/social-links/img/linkedin.png';
+           $linkedin_icon = plugins_url() . '/fatheadlinks/img/linkedin.png';
        } 
 
        if(isset($instance['icon_width'])){
@@ -144,5 +167,20 @@ class Social_Links_Widget extends WP_Widget {
 		</p>
 
        <?php
-	}
+    }
+    
+    	/**
+	 * Gets and Displays Social Icons
+	 *
+	 * @param array $links Social Links
+     * @param array $icons Social Icons
+     * @param array $icon_width Width of Icons
+	 */
+	public function getSocialLinks( $links, $icons, $icon_width ) {
+        ?>
+            <div class="fatheadlinks">
+                <a target="_blank" href="<?php echo esc_attr($links['facebook']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['facebook']); ?>"</a>
+            </div>
+        <?php
+    }
 }
