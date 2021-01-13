@@ -176,7 +176,8 @@ class Fathead_Links_Widget extends WP_Widget {
      * @param array $icons Fathead Icons
      * @param array $icon_width Width of Icons
 	 */
-	public function getFatheadLinks( $links, $icons, $icon_width ) {
+	public function getFatheadLinks( $links, $icons, $icon_width ) {\
+		//learn why it was pulling social
         ?>
             <div class="fatheadlinks">
             <a target="_blank" href="<?php echo esc_attr($links['facebook']); ?>"><img width="<?php echo esc_attr($icon_width); ?>" src="<?php echo esc_attr($icons['facebook']); ?>"></a>
