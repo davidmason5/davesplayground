@@ -37,7 +37,7 @@ class Fathead_Links_Widget extends WP_Widget {
 
         echo $args['before_widget'];
 
-        //Call frontend function
+        //Call frontend function - learn more here
         $this->getFatheadLinks($links, $icons, $icon_width);
 
         echo $args['after_widget'];
