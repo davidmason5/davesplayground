@@ -45,7 +45,7 @@ class Fathead_Links_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Outputs the options form on admin
+	 * Outputs the options form on admin learn more here
 	 *
 	 * @param array $instance The widget options
 	 */
